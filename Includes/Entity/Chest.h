@@ -18,19 +18,22 @@ class Chest : public Interactive {
 
 private:
     std::pair<uint32_t, uint32_t> position;
+    std::string name = "隨機寶箱";
+    std::vector<std::string> treasures;
 public:
-    Chest() {
-        position = { -69, -69 };
-    };
-    Chest(int x, int y) {
-        position = { x,y };
-    };
+    Chest();
+    Chest(int x, int y);
+    Chest(int x, int y, std::string name, std::vector<std::string> treasures);
 public:
     void SetPosition(const std::pair<uint32_t, uint32_t>&);
     std::pair<uint32_t, uint32_t> GetPosition() const;
 
+    std::string GetName() { return name; }
+
     // Give Item or Money to Role
     void GiveTreasureTo(Role*);
+
+
 };
 
 #endif

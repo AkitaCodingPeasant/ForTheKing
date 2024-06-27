@@ -318,7 +318,7 @@ void UI::PrintWorldMap() {
     std::string colorLast;
     int H = WorldMap::getHeight();
     int W = WorldMap::getWidth();
-    for (int c = 5; c >= 0; c--) {
+    for (int c = 7; c >= 0; c--) {
         std::cout << getColorBoard()[c];
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 15; j++) {
@@ -334,7 +334,7 @@ void UI::PrintWorldMap() {
                     continue;
                 }
                 if (getFog()[y][x]) {
-                    if (c == 5) {
+                    if (c == 7) {
                         for (int ii = 0; ii < 3; ii++) {
                             moveCursor(2 + j * 8, 6 + i * 4 + ii);
                             std::cout << "      ";

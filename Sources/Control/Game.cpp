@@ -56,82 +56,6 @@ void Game::sortExecutionRole() {
 
 // Public
 
-void Game::Initialize() {
-    SkillTable::Initialize();
-    EquipmentTable::Initialize();
-    ItemTable::Initialize();
-
-    static Role Kazusa("杏山千紗", 1, 1);
-    Kazusa.equipForce("WoodenSword");
-    Kazusa.equipForce("LaurelWreath");
-    Kazusa.equipForce("Bracelet");
-    static Role Shiroko("砂狼白子", 3, 1);
-    Shiroko.equipForce("RitualSword");
-    Shiroko.equipForce("Robe");
-    Shiroko.equipForce("Shoes");
-    Shiroko.addItemToBackpack("HolyGrail");
-    Shiroko.addItemToBackpack("LaurelWreath");
-    Shiroko.addItemToBackpack("LeatherArmor");
-    static Role Hoshino("小鳥游星野", 5, 1);
-    Hoshino.equipForce("Hammer");
-    Hoshino.equipForce("PlateArmor");
-    Hoshino.equipForce("HolyGrail");
-
-    // Role::backpack.useItem("物品名稱", 使用者); // 這邊 Parameter 可以再加更多東西
-
-    /*
-    std::string name;
-    uint16_t price;
-    ItemCommand* command;
-    */
-
-    roles = { &Kazusa ,&Shiroko ,&Hoshino };
-
-    // static Role* KazusaRef = &Kazusa;
-    // static Role* ShirokoRef = &Shiroko;
-    // static Role* HoshinoRef = &Hoshino;
-    // roles.push_back(KazusaRef);
-    // roles.push_back(ShirokoRef);
-    // roles.push_back(HoshinoRef);
-    sortExecutionRole();
-
-    // static Enemy fat_tonya("胖子 - Tonya", 1, 3);
-    // static Enemy troll_tonya("巨魔 - Tonya", 3, 3);
-    // static Enemy boomer_tonya("胖子炸彈 - Tonya", 5, 3);
-    static Enemy prof_D("戴文凱", 1, 3);
-    static Enemy prof_P("鮑興國", 3, 3);
-    static Enemy prof_H("花凱龍", 5, 3);
-    static Enemy prof_Ding("頂天端", 1, 5);
-    static Enemy prof_S("項天瑞", 3, 5);
-    prof_Ding.equipForce("Hammer");
-    prof_S.equipForce("Hammer");
-    prof_D.equipForce("Hammer");
-    prof_P.equipForce("Hammer");
-    prof_H.equipForce("Hammer");
-
-    enemys = { &prof_D ,&prof_P ,&prof_H ,&prof_Ding , &prof_S };
-
-    // static Tent tent("他媽的帳篷", 1, 7, 10);
-    // static Tent tent2("他媽的帳篷2", 7, 1, 2);
-    // tents = { &tent , &tent2 };
-
-    static Store store1("TR-509 處刑場", 5, 5);
-    stores = { &store1 };
-
-    static Chest chest1(7, 1);
-    chests = { &chest1 };
-
-    WorldMap::SetTents(tents);
-    WorldMap::SetRoles(roles);
-    WorldMap::SetEnemys(enemys);
-    WorldMap::SetStores(stores);
-    WorldMap::SetChests(chests);
-
-    WorldMap::loadMap("W-1.txt");
-
-    return;
-}
-
 void Game::MainProcess(void) {
     using namespace std;
     int turn = 1;
@@ -143,11 +67,12 @@ void Game::MainProcess(void) {
 
     system("Pause");
     system("CLS");
+    /*
     for (int i = 0; i < 56; i++) {
         UI::displayFile("porf.txt", i, 0);
         Sleep(10);
     }
-
+    */
     for (auto R : roles) {
         WorldMap::SetFog(R->GetPosition().second, R->GetPosition().first);
     }
@@ -188,13 +113,17 @@ void Game::MainProcess(void) {
 }
 
 int Game::OnePlayerMovePhase(Role* currentActRole) {
-
     int chestX = currentActRole->GetPosition().first - 5 + rand() % 10;
     int chestY = currentActRole->GetPosition().second - 5 + rand() % 10;
-    if (!WorldMap::GetRect({ chestX, chestY }).Interact && WorldMap::GetRect({ chestX, chestY }).moveable) {
-        createChest(chestX, chestY);
-    }
 
+    //if (!WorldMap::GetRect({ chestX, chestY }).Interact && WorldMap::GetRect({ chestX, chestY }).moveable) {
+        //createChest(chestX, chestY);
+    //}
+
+    WorldMap::setPos(currentActRole->GetPosition());
+    std::cout << BG_WHITE;
+    UI::displayMapGrid();
+    UI::PrintWorldMap();
 
     UI::logEvent("");
     UI::logDivider(currentActRole->GetName(), "的回合");
@@ -233,12 +162,6 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
         }
         else if (keyState[KeyBoard::EI]) {
             choiceItem(currentActRole);
-            /*
-            Game::createTent(currentActRole);
-            WorldMap::SetTents(tents);
-            UI::PrintWorldMap();
-            */
-            // backpack process
         }
         else if (keyState[KeyBoard::EQ]) {
             UI::BuildFrame(121, 0, 179, 28);
@@ -257,11 +180,6 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
             }
         }
         else if (keyState[KeyBoard::EDU] || keyState[KeyBoard::EDL] || keyState[KeyBoard::EDR] || keyState[KeyBoard::EDD]) {
-            // - Roll Dice
-            // Display Please Roll Dice (UI)
-            // displayRollDice();
-            // ditect entity is interactiveable
-
             if (Rpos == WorldMap::pos && movementPoint > 0) {
                 if (keyState[KeyBoard::EDU]) {
                     moved = currentActRole->movePos(0, -1);
@@ -306,7 +224,10 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
             checkOut = true;
         }
         else if (keyState[KeyBoard::EESC]) {
+            movementPoint = maxMovementPoint;
             WorldMap::RemoveFog();
+            UI::moveCursor(0, 0);
+            std::cout << WorldMap::pos.first << "/" << WorldMap::pos.second << "----";
         }
         else {
             continue;
@@ -360,6 +281,7 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
                 int result = UI::makeChoice(choices, 70, 1);
                 UI::BuildVoid(65, 0, 110, 3);
                 if (result == 0) {
+                    int kills = 0;
                     movementPoint = 0;
                     UI::battlePhase();
                     Field F(battleR, battleE);
@@ -368,17 +290,18 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
                     for (int i = 0; i < roles.size(); i++) {
                         if (roles[i]->GetStatus() & DEAD) {
                             roles.erase(roles.begin() + i);
-                            WorldMap::SetRoles(roles);
                             i--;
                         }
                     }
+                    WorldMap::SetRoles(roles);
                     for (int i = 0; i < enemys.size(); i++) {
                         if (enemys[i]->GetStatus() & DEAD) {
                             enemys.erase(enemys.begin() + i);
-                            WorldMap::SetEnemys(enemys);
+                            kills++;
                             i--;
                         }
                     }
+                    WorldMap::SetEnemys(enemys);
                     if (enemys.size() == 0) {
                         //戰鬥勝利
                     }
@@ -392,6 +315,39 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
                     }
                     UI::PreWorldMap(roles);
                     UI::mapPhase();
+                    UI::logEvent("");
+                    UI::logDivider("回合結算");
+                    std::vector<std::string> ITEM_TABLE = { "Godsbeard", "GoldenRoot", "TeleportScroll", "Tent" };
+                    int money = Role::GetMoney();;
+                    int treasure = 0;
+                    switch (kills) {
+                    case 0:
+                        UI::logEvent("未擊敗敵人");
+                        break;
+                    case 1:
+                        UI::logEvent("擊敗一名敵人");
+                        UI::logEvent("獲得敵人掉落獎勵");
+                        treasure = (rand() % 100) + 1;
+                        break;
+                    case 2:
+                        UI::logEvent("擊敗兩名敵人");
+                        UI::logEvent("獲得多項獎勵");
+                        treasure = (rand() % 100) + 151;
+                        Role::backpack.addItem(ItemTable::itemMap[ITEM_TABLE[rand() % 3]]);
+                        Role::backpack.addItem(ItemTable::itemMap[ITEM_TABLE[rand() % 4]]);
+                        break;
+                    case 3:
+                        UI::logEvent("剿滅敵人團夥");
+                        UI::logEvent("獲得豐厚獎勵");
+                        treasure = (rand() % 100) + 400;
+                        Role::backpack.addItem(ItemTable::itemMap[ITEM_TABLE[rand() % 3]]);
+                        Role::backpack.addItem(ItemTable::itemMap[ITEM_TABLE[rand() % 3]]);
+                        Role::backpack.addItem(ItemTable::itemMap[ITEM_TABLE[rand() % 3]]);
+                        Role::backpack.addItem(ItemTable::itemMap[ITEM_TABLE[rand() % 4]]);
+                        Role::backpack.addItem(ItemTable::itemMap["Tent"]);
+                        break;
+                    }
+                    Role::SetMoney(money + treasure);
                     break;
                 }
                 else {
@@ -432,7 +388,7 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
                 }
             }
             if (!WorldMap::GetRect().chests.empty()) {
-                std::vector<std::string> choices = { "隨機事件" , "取消" };
+                std::vector<std::string> choices = { "開啟寶箱" , "取消" };
                 int result = UI::makeChoice(choices, 70, 1);
                 UI::BuildVoid(65, 0, 110, 3);
                 if (result == 0) {
@@ -440,7 +396,8 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
                     for (auto it = chests.begin(); it != chests.end();) {
                         if ((*it) == WorldMap::GetRect().chests[0]) {
                             it = chests.erase(it);
-                        } else {
+                        }
+                        else {
                             ++it;
                         }
                     }
@@ -452,7 +409,7 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
         }
         if (moved) {
             // 隨機事件判定
-            if (rand() % 100 < 0) {
+            if (rand() % 100 < 5) {
                 Chest chest;
                 chest.GiveTreasureTo(currentActRole);
             }
@@ -507,7 +464,7 @@ int Game::OnePlayerMovePhase(Role* currentActRole) {
             UI::DisplayTent(121, 0, WorldMap::GetRect().tents);
         }
         if (!WorldMap::GetRect().chests.empty() && !WorldMap::getFog(1)) {
-            UI::DisplayChest(121, 0);
+            UI::DisplayChest(121, 0, WorldMap::GetRect().chests);
         }
 
         if ((!WorldMap::GetRect().enemys.empty() || !WorldMap::GetRect().roles.empty()) && !WorldMap::getFog(1)) {}
@@ -653,6 +610,7 @@ void Game::choiceItem(Role* role) {
             }
         }
         else {
+            itemStr.resize(44, ' ');
             itemStr += " : *";
         }
         choices.push_back(itemStr);

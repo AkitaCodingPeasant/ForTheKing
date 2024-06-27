@@ -19,23 +19,24 @@ void Field::StartBattle(void) {
 
     while (1) {
         currEvent = RefreshEvent();
-        
+
         uint8_t currStatus = currEvent->GetObj()->GetStatus();
         if (currStatus & DEAD) {
             try {
                 ExitPhase();
-            } catch (const exception& e) {
+            }
+            catch (const exception& e) {
                 UI::displayString(e.what(), 6, 13);
                 RestoreEvent();
                 return;
             }
             continue;
         }
-        
+
         if (currStatus & RETREAT) {
             continue;
         }
-        
+
         DecreaseEntityBuff();
         // 輸出該人資訊
         if (currEvent->GetObj()->findAvailableBuff("Poisoned")) {
@@ -51,13 +52,13 @@ void Field::StartBattle(void) {
                 return;
             }
         }
-        
+
         if (currEvent->GetObj()->findAvailableBuff("Dizziness")) {
             UI::logDivider(currEvent->GetObj()->GetName() + " 回合跳過");
             currEvent->GetObj()->useBuff("Dizziness");
             continue;
         }
-        
+
         currEvent->GetObj()->displayTotalSkill();
         MainPhase(currEvent);
         RemoveDeadEntity();
@@ -150,7 +151,8 @@ void Field::RemoveDeadEntity(void) {
     for (auto it = roles.begin(); it != roles.end();) {
         if ((*it)->GetStatus() & DEAD || (*it)->GetStatus() & RETREAT) {
             it = roles.erase(it);
-        } else {
+        }
+        else {
             ++it;
         }
     }
@@ -158,7 +160,8 @@ void Field::RemoveDeadEntity(void) {
     for (auto it = enemys.begin(); it != enemys.end();) {
         if ((*it)->GetStatus() & DEAD || (*it)->GetStatus() & RETREAT) {
             it = enemys.erase(it);
-        } else {
+        }
+        else {
             ++it;
         }
     }
@@ -386,7 +389,7 @@ std::vector<Entity*> Field::ChooseTarget(Action* currEvent, int TargetType) {
         }
         break;
     }
-    int targetNumber = UI::makeChoice(targetName, 26, 13);
+    int targetNumber = UI::makeChoice(targetName, 40, 13);
     if (targetNumber == -1) {
         return {};
     }

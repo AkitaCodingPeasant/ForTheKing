@@ -16,6 +16,7 @@ class Entity;
 class Active;
 class Store;
 class Tent;
+class Chest;
 
 namespace Displayer {
 
@@ -41,7 +42,7 @@ namespace Displayer {
 
     void displayString(int, int, const std::string);
 
-    void displayChoice(std::vector<std::string>, int, int, int, int max_rows , int locate);
+    void displayChoice(std::vector<std::string>, int, int, int, int max_rows, int locate);
 
     std::string horizontalLine(const std::string, int, const char);
 
@@ -77,7 +78,7 @@ namespace Displayer {
 
     int DisplayStore(int x, int y, std::vector<Store*> stores);
     int DisplayTent(int x, int y, std::vector<Tent*> tents);
-    int DisplayChest(int x, int y);
+    int DisplayChest(int x, int y, std::vector<Chest*> chests);
 };
 
 #endif

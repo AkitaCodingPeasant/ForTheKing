@@ -1,6 +1,7 @@
 #include "Tent.h"
 #include "Attribute.h"
 #include "Role.h"
+#include "Game.h"
 
 Tent::Tent(std::string name, std::pair<uint32_t, uint32_t> position) {
     this->name = name;
@@ -18,6 +19,7 @@ Tent::Tent(std::string name, uint32_t x, uint32_t y , int duration) {
     this->name = name;
     this->position = { x,y };
     this->duration = duration;
+    Game::tents.push_back(this);
 }
 
 std::pair<uint32_t, uint32_t> Tent::GetPosition(void) const {

@@ -21,6 +21,8 @@ void EquipmentTable::WeaponTableInitialize() {
 	Active Provoke = SkillTable::activeMap.find("Provoke")->second;
 	Active ShockBlast = SkillTable::activeMap.find("ShockBlast")->second;
 	Active Heal = SkillTable::activeMap.find("Heal")->second;
+	Active TsubameGaeshi = SkillTable::activeMap.find("燕返．TsubameGaeshi")->second;
+	Active Battojutsu = SkillTable::activeMap.find("拔刀．Battojutsu")->second;
 
 	Attribute bareHandAttribute;
 	Skill bareHandSkill;
@@ -56,12 +58,23 @@ void EquipmentTable::WeaponTableInitialize() {
 	Skill ritualSwordSkill;
 	ritualSwordSkill.pushActive(ShockBlast);
 
+	Attribute ProdigalKatanaAttribute;
+	ProdigalKatanaAttribute.SetMaxFocus(2);
+	ProdigalKatanaAttribute.SetFocus(2);
+	ProdigalKatanaAttribute.SetPA(30);
+	ProdigalKatanaAttribute.SetMA(20);
+	ProdigalKatanaAttribute.SetACC(15);
+	Skill ProdigalKatanaSkill;
+	ProdigalKatanaSkill.pushActive(TsubameGaeshi);
+	ProdigalKatanaSkill.pushActive(Battojutsu);
+
 	weaponMap["BareHand"] = Weapon("BareHand", bareHandAttribute, bareHandSkill, 1, 'P');
 	weaponMap["WoodenSword"] = Weapon("WoodenSword", woodenSwordAttribute, woodenSwordSkill, 3, 'P');
 	weaponMap["Hammer"] = Weapon("Hammer", hammerAttribute, hammerSkill, 4, 'P');
 	weaponMap["GiantHammer"] = Weapon("GiantHammer", giantHammerAttribute, giantHammerSkill, 5, 'P');
 	weaponMap["MagicWand"] = Weapon("MagicWand", magicWandAttribute, magicWandSkill, 3, 'M');
 	weaponMap["RitualSword"] = Weapon("RitualSword", ritualSwordAttribute, ritualSwordSkill, 1, 'M');
+	weaponMap["浪人宗劍．ProdigalKatana"] = Weapon("浪人宗劍．ProdigalKatana", ProdigalKatanaAttribute, ProdigalKatanaSkill, 5, 'P');
 }
 
 void EquipmentTable::ArmorTableInitialize() {

@@ -1,0 +1,202 @@
+。野生BOSS
+
+。武器
+
+浪人宗劍．ProdigalKatana
+maxFocus+2 focus+2 PA+30 MA+20 ACC+15
+主動::燕返．TsubameGaeshi
+主動::拔刀．Battojutsu
+被動::居合．Iaido
+被動::凝神．Concentrate
+
+禁忌秘典 TabooGrimoire
+MA+45 ACC+10
+主動::雷擊．Thunderbolt
+主動::霜凜．Freeze
+主動::火殞．Inferno
+
+黃金巨錘 GoldenHammer
+PA+35 SPD-5 ACC-15
+主動::威壓Coercion
+被動::HammerSplash
+
+祭司權杖 PriestScepter
+maxHP+5 HP+5 MA+25
+主動::火殞．Inferno
+主動::威壓．Coercion
+主動::Heal
+
+王♂之財寶 Gate♂OfBabylon
+PA+5 PD+5 MA+5 MD+5 SPD+5 ACC+5
+主動::掃射．Spary
+主動::威壓．Coercion
+
+赤-燄龍聖劍 FlameRetardantDragonSword
+maxHP+10 maxFocus+1 HP+10 focus+1 PA+30 PD+5 MA+30 MD+5 SPD+5 ACC+15
+主動::拔刀．Battojutsu
+主動::劍氣．Battojutsu
+主動::龍息．DragonBreath
+被動::鬥氣．SpiritOfFight
+
+。裝甲
+
+銀狼毛皮 SilverWolfFur
+PD+20 MD+5 SPD+5
+主動::SpeedUp
+
+青龍鱗鎧 DragonScaleArmor
+maxHP+10 HP+10 PD+15 MD+15 ACC+5
+被動::再生．Regeneration
+
+暗夜披風 CloakOfDarkness
+maxHP-10 HP-10 PD+10 MD+10 SPD+15 ACC+5
+主動::嗜血．Bloodthirsty
+
+野獸皮毛 Animalfur
+PD+20 MD+10
+
+惡魔之翼 WingsOfDevil 
+maxHP+10 HP+10 PD+15 MD+15 SPD+5 ACC+15
+主動::嗜血．Bloodthirsty
+
+赤-赤龍血鎧 CrimsonDragonArmor
+maxHP+20 maxFocus+1 HP+20 focus+1 PA+5 PD+30 MA+5 MD+30 SPD+5 ACC+5
+被動::再生．Regeneration
+被動::堅毅．Perseverance
+
+。飾品
+
+聖芒鎖鍊 SacredChain
+PA+5 PD+5 MA+5 MD+5 SPD-15 ACC+20
+主動::審判．Trial
+被動::堅毅．Perseverance
+被動::鬥氣．SpiritOfFight
+
+詛咒盾牌 CursedShield
+PD+20 MD+20 SPD-5
+主動::Provoke
+被動::詛咒．Curse
+被動::Fortify
+
+不朽圖騰 UndeadTotem
+maxHP+20 HP+20 PD+20 MD+20
+被動::詛咒．Curse
+被動::再生．Regeneration
+
+漩湧之眼 EyeOfMaelstrom
+maxHP+30 HP+30 SPD+5
+主動::SpeedUp
+被動::再生．Regeneration
+
+褻瀆的吊墜 ProfanePendant
+PA+5 PD+5 MA+5 MD+5 ACC-20
+主動::ShockBlast
+被動::詛咒．Curse
+
+赤-龍族秘卷 ScrollOfTheDragon
+maxHP+10 maxFocus+1 HP+10 focus+1 PA+10 PD+10 MA+10 MD+10 SPD+10 ACC+10
+主動::火殞．Inferno
+主動::續命．Resurgence
+被動::反轉．Alter
+
+。技能
+
+
+
+。主動
+
+燕返．TsubameGaeshi
+物魔混傷 單體
+單體三段傷害
+CD:5
+
+拔刀．Battojutsu
+物理傷害 單體
+大成功雙倍傷害追加暈眩
+CD:3
+
+雷擊．Thunderbolt
+魔法傷害 全體
+大成功追加憤怒
+CD:3
+
+霜凜．Freeze
+魔法傷害 全體
+大成功追加暈眩
+CD:3
+
+火殞．Inferno
+魔法傷害 全體
+CD:3
+
+威壓．Coercion
+大成功敵方全體憤怒
+CD:2
+
+掃射．Spary
+物魔混傷 全體
+CD:1
+
+劍氣．SwordBeam
+物魔混傷 全體
+大成功追加暈眩
+CD:6
+
+龍息．DragonBreath
+魔法傷害 全體 - 無視防禦
+中毒
+CD:3
+
+續命．Resurgence
+全體大恢復
+CD:99
+
+審判．Trial
+敵方全體暈眩
+CD:6
+
+嗜血．Bloodthirsty
+物理傷害 單體
+大成功追加自身治療
+CD:1
+
+。被動
+
+居合．Iaido
+被傷害時 使用SpeedUp
+
+凝神．Concentrate
+回合開始 恢復1專注
+
+詛咒．Curse
+被傷害時 無傷或者兩倍傷害
+
+反轉．Alter
+被傷害時 20%機率變成恢復傷害值
+
+堅毅．Perseverance
+被傷害時 傷害*0.75
+
+鬥氣．SpiritOfFight
+被傷害時 恢復1專注
+
+再生．Regeneration
+回合開始 恢復5hp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

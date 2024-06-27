@@ -21,7 +21,7 @@ class Game {
 private:
     std::vector<Role*> movePriority; // Priority of Character Movement
 
-private:
+public:
     static std::vector<Role*> roles;
     static std::vector<Enemy*> enemys;
     static std::vector<Tent*> tents;

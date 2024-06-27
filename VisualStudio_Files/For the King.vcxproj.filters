@@ -150,6 +150,9 @@
     <ClCompile Include="..\Sources\Entity\Tent.cpp">
       <Filter>Sources\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sources\Control\GameInitialize.cpp">
+      <Filter>Sources\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Includes\ConstData.h">

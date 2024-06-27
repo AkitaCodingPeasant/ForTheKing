@@ -5,6 +5,7 @@
 #include "UI.h"
 #include "Role.h"
 #include <Item.h>
+#include "Game.h"
 
 // Public
 Store::Store(std::string name, std::pair<int, int> position) {
@@ -15,6 +16,7 @@ Store::Store(std::string name, std::pair<int, int> position) {
 Store::Store(std::string name, int x, int y) {
     this->name = name;
     this->position = { x,y };
+    Game::stores.push_back(this);
 }
 
 std::pair<int, int> Store::GetPosition(void) const {

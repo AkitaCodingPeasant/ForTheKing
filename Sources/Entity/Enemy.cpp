@@ -9,6 +9,7 @@ Enemy::Enemy(std::string name) : Interactive() {
 Enemy::Enemy(std::string name, int x, int y) : Interactive() {
     SetName(name);
     SetPosition({ x, y });
+    Game::enemys.push_back(this);
 }
 void Enemy::SetPosition(const std::pair<uint32_t, uint32_t>& position) {
     this->position = position;

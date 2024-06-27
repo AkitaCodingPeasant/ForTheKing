@@ -19,6 +19,8 @@ void SkillTable::ActiveTableInitialize() {
     activeMap["ShockBlast"] = Active("ShockBlast", 2, 3, new ShockBlastActiveCommand(), 2);
     activeMap["Heal"] = Active("Heal", 2, 2, new HealActiveCommand(), 3);
     activeMap["SpeedUp"] = Active("SpeedUp", 4, 2, new SpeedUpActiveCommand(), 3);
+    activeMap["燕返．TsubameGaeshi"] = Active("燕返．TsubameGaeshi", 6, 3, new TsubameGaeshiActiveCommand(), 1);
+    activeMap["拔刀．Battojutsu"] = Active("拔刀．Battojutsu", 3, 5, new BattojutsuActiveCommand(), 1);
 }
 
 void SkillTable::PassiveTableInitialize() {

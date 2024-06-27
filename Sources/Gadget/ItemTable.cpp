@@ -28,6 +28,7 @@ void ItemTable::ItemTableInitialize() {
     itemMap["HolyGrail"] = new NonStackableItem("HolyGrail", (rand() % 19 + 1) * 5, nullptr);
     itemMap["Shoes"] = new NonStackableItem("Shoes", (rand() % 19 + 1) * 5, nullptr);
     itemMap["Bracelet"] = new NonStackableItem("Bracelet", (rand() % 19 + 1) * 5, nullptr);
+    itemMap["浪人宗劍．ProdigalKatana"] = new NonStackableItem("浪人宗劍．ProdigalKatana", 9999 , nullptr);
 }
 
 Item* ItemTable::getItem(const std::string& name) {

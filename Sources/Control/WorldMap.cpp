@@ -31,7 +31,7 @@ std::vector<Store*> WorldMap::stores;
 std::vector<Tent*> WorldMap::tents;
 std::vector<Chest*> WorldMap::chests;
 
-const std::vector<std::string> colorBoard = { BG_BRIGHT_BLACK, BG_WHITE, BG_BRIGHT_BLACK, BG_GREEN, BG_BRIGHT_BLUE, BG_BRIGHT_WHITE ,BG_BRIGHT_RED };
+const std::vector<std::string> colorBoard = { BG_BRIGHT_BLACK, BG_WHITE, BG_BRIGHT_BLACK, BG_BRIGHT_GREEN, BG_GREEN, BG_BRIGHT_BLUE ,BG_BLUE , BG_BRIGHT_WHITE};
 
 void WorldMap::loadMap(std::string mapFile) {
     using namespace std;
@@ -121,17 +121,17 @@ void WorldMap::SetFog(int row, int col) {
     int rightLimit = col + fogWidth;
 
     for (int i = topLimit; i < row; i++) {
-        if (i < 0 || i >= 50) continue;
+        if (i < 0 || i >= HEIGHT) continue;
         for (int j = col - (i - topLimit) + 2; j < col + (i - topLimit) - 1; j++) {
-            if (j < 0 || j >= 140) continue;
+            if (j < 0 || j >= WIDTH) continue;
             fog[i][j] = false;
             //     = (fog[i][j]) ? false : true;
         }
     }
     for (int i = row; i < downLimit; i++) {
-        if (i < 0 || i >= 50) continue;
+        if (i < 0 || i >= HEIGHT) continue;
         for (int j = col - (downLimit - i) + 2; j < col + (downLimit - i) - 1; j++) {
-            if (j < 0 || j >= 140) continue;
+            if (j < 0 || j >= WIDTH) continue;
             fog[i][j] = false;
             //     (fog[i][j]) ? false : true;
         }
@@ -231,7 +231,7 @@ Rect WorldMap::GetRect(std::pair<int, int > pos) {
             output.chests.push_back(C);
         }
     }
-    if (output.terrain == 1) {
+    if (output.terrain == 1 || output.terrain == 3 || output.terrain == 5) {
         output.moveable = true;
     }
     else {

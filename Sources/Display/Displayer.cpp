@@ -10,6 +10,8 @@
 #include "UI.h"
 #include "Store.h"
 #include "Tent.h"
+#include "Chest.h"
+
 
 int Displayer::stackHeight;
 
@@ -560,7 +562,6 @@ int Displayer::DisplayStore(int x, int y, std::vector<Store*> stores) {
 
 int Displayer::DisplayTent(int x, int y, std::vector<Tent*> tents) {
     using namespace std;
-
     for (int i = 0; i < tents.size(); i++) {
         std::string name = tents[i]->GetName();
         BuildVoid(x, y + stackHeight, x + 58, y + 6 + stackHeight);
@@ -573,13 +574,14 @@ int Displayer::DisplayTent(int x, int y, std::vector<Tent*> tents) {
     return 0;
 }
 
-
-int Displayer::DisplayChest(int x, int y) {
+int Displayer::DisplayChest(int x, int y, std::vector<Chest*> chests) {
     using namespace std;
-    BuildVoid(x, y + stackHeight, x + 58, y + 6 + stackHeight);
-    moveCursor(x + 3, y + 2 + stackHeight);
-    cout << "隨機事件: ???";
-    stackHeight += 2;
-
+    for (int i = 0; i < chests.size(); i++) {
+        BuildVoid(x, y + stackHeight, x + 58, y + 6 + stackHeight);
+        moveCursor(x + 3, y + 2 + stackHeight);
+        cout << "Chest: ";
+        cout << chests[i]->GetName();
+        stackHeight += 2;
+    }
     return 0;
 }
